@@ -31,7 +31,6 @@ import {
   setInternetGB,
   setSMS,
   setAdditionalServices,
-  setTotalCost,
   selectTariffConfig,
 } from "./store/tariffConfigSlice";
 import { calculateTotalCost } from "./helpers/calculateTotalCost";
@@ -46,11 +45,6 @@ export default function App() {
   const dispatch = useDispatch();
   const tariffData = useSelector(selectTariffConfig);
   const totalCost = calculateTotalCost(tariffData);
-
-  const handleMinutesChange = (newValue: number) => {
-    dispatch(setMinutes(newValue));
-    dispatch(setTotalCost(totalCost));
-  };
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     alert(JSON.stringify(values));
@@ -114,12 +108,12 @@ export default function App() {
 
           <Slider
             value={[tariffData.minutes]}
-            onValueChange={(newValue) => handleMinutesChange(newValue[0])}
+            onValueChange={(newValue) => dispatch(setMinutes(newValue[0]))}
             id="minutes"
             defaultValue={[tariffData.minutes]}
-            max={100}
+            max={600}
             step={5}
-            className=" min-w-max "
+            className="min-w-max "
           />
 
           <Label htmlFor="internet">Интернет</Label>
