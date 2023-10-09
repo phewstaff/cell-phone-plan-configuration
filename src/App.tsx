@@ -21,9 +21,9 @@ import * as z from "zod";
 import { useForm } from "react-hook-form";
 
 import { formSchema } from "./schemas";
-import { Checkbox } from "@radix-ui/react-checkbox";
 import { Label } from "./components/ui/label";
 import { Slider } from "./components/ui/slider";
+import { Checkbox } from "./components/ui/checkbox";
 
 export default function App() {
   const form = useForm<z.infer<typeof formSchema>>({
