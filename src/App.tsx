@@ -21,6 +21,9 @@ import * as z from "zod";
 import { useForm } from "react-hook-form";
 
 import { formSchema } from "./schemas";
+import { Checkbox } from "@radix-ui/react-checkbox";
+import { Label } from "./components/ui/label";
+import { Slider } from "./components/ui/slider";
 
 export default function App() {
   const form = useForm<z.infer<typeof formSchema>>({
@@ -84,6 +87,61 @@ export default function App() {
               </FormItem>
             )}
           />
+
+          <Label htmlFor="minutes">Минуты</Label>
+          <Slider
+            onValueChange={() => {}}
+            id="minutes"
+            defaultValue={[50]}
+            max={75}
+            step={25}
+            className=" min-w-max "
+          />
+
+          <div className="flex justify-between">
+            <span>1</span>
+            <span>2</span>
+            <span>3</span>
+            <span>4</span>
+          </div>
+
+          <Label htmlFor="internet">Интернет:</Label>
+
+          <Slider
+            id="internet"
+            defaultValue={[50]}
+            max={75}
+            step={25}
+            className="min-w-max"
+            onValueChange={() => {}}
+          />
+
+          <div className="flex justify-between">
+            <span>1</span>
+            <span>2</span>
+            <span>3</span>
+            <span>4</span>
+          </div>
+
+          <div className="flex items-center space-x-2">
+            <Checkbox id="buy" />
+            <Label
+              htmlFor="buy"
+              className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+            >
+              Купить
+            </Label>
+          </div>
+
+          <div className="flex items-center space-x-2">
+            <Checkbox id="rent" />
+            <Label
+              htmlFor="rent"
+              className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+            >
+              Арендовать
+            </Label>
+          </div>
 
           <Button className="max-w-xs" type="submit">
             Submit
