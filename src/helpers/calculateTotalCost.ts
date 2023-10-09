@@ -6,9 +6,9 @@ export function calculateTotalCost({
   internetGB,
   additionalServices,
 }: TariffConfigState) {
-  const costPerMinute = 0.1;
-  const costPerSMS = 0.05;
-  const costPerInternetGB = 10;
+  const costPerMinute = 1;
+  const costPerSMS = 0.5;
+  const costPerInternetGB = 5;
   const additionalServiceCost = 5;
 
   const totalCost =

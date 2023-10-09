@@ -117,8 +117,8 @@ export default function App() {
             onValueChange={(newValue) => handleMinutesChange(newValue[0])}
             id="minutes"
             defaultValue={[tariffData.minutes]}
-            max={650}
-            step={30}
+            max={100}
+            step={5}
             className=" min-w-max "
           />
 
@@ -128,7 +128,7 @@ export default function App() {
             value={[tariffData.internetGB]}
             id="internet"
             defaultValue={[tariffData.internetGB]}
-            max={75}
+            max={100}
             step={25}
             className="min-w-max"
             onValueChange={(newValue) => dispatch(setInternetGB(newValue[0]))}
@@ -139,7 +139,7 @@ export default function App() {
             value={[tariffData.sms]}
             id="sms"
             defaultValue={[tariffData.sms]}
-            max={75}
+            max={100}
             step={25}
             className="min-w-max"
             onValueChange={(newValue) => dispatch(setSMS(newValue[0]))}
