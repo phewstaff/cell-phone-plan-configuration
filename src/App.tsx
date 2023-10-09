@@ -25,10 +25,31 @@ import { Label } from "./components/ui/label";
 import { Slider } from "./components/ui/slider";
 import { Checkbox } from "./components/ui/checkbox";
 
+import { useDispatch, useSelector } from "react-redux";
+import {
+  setMinutes,
+  setInternetGB,
+  setAdditionalServices,
+  setTotalCost,
+  selectTariffConfig,
+} from "./store/tariffConfigSlice";
+import { calculateTotalCost } from "./helpers/calculateTotalCost";
+
+// --------------------------------------------------------------------------- //
+
 export default function App() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
   });
+
+  const dispatch = useDispatch();
+  const tariffData = useSelector(selectTariffConfig);
+  const totalCost = calculateTotalCost(tariffData);
+
+  const handleMinutesChange = (newValue: number) => {
+    dispatch(setMinutes(newValue));
+    dispatch(setTotalCost(totalCost));
+  };
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     alert(JSON.stringify(values));
@@ -89,39 +110,28 @@ export default function App() {
           />
 
           <Label htmlFor="minutes">Минуты</Label>
+
           <Slider
-            onValueChange={() => {}}
+            value={[tariffData.minutes]}
+            onValueChange={(newValue) => handleMinutesChange(newValue[0])}
             id="minutes"
-            defaultValue={[50]}
-            max={75}
-            step={25}
+            defaultValue={[tariffData.minutes]}
+            max={650}
+            step={30}
             className=" min-w-max "
           />
 
-          <div className="flex justify-between">
-            <span>1</span>
-            <span>2</span>
-            <span>3</span>
-            <span>4</span>
-          </div>
-
-          <Label htmlFor="internet">Интернет:</Label>
+          <Label htmlFor="internet">Интернет</Label>
 
           <Slider
+            value={[tariffData.internetGB]}
             id="internet"
-            defaultValue={[50]}
+            defaultValue={[tariffData.internetGB]}
             max={75}
             step={25}
             className="min-w-max"
-            onValueChange={() => {}}
+            onValueChange={(newValue) => dispatch(setInternetGB(newValue[0]))}
           />
-
-          <div className="flex justify-between">
-            <span>1</span>
-            <span>2</span>
-            <span>3</span>
-            <span>4</span>
-          </div>
 
           <div className="flex items-center space-x-2">
             <Checkbox id="buy" />
@@ -144,7 +154,7 @@ export default function App() {
           </div>
 
           <Button className="max-w-xs" type="submit">
-            Submit
+            {totalCost}
           </Button>
         </form>
       </Form>

@@ -1,0 +1,45 @@
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+
+export interface TariffConfigState {
+  minutes: number;
+  internetGB: number;
+  additionalServices: string[];
+  totalCost: number;
+}
+
+const initialState: TariffConfigState = {
+  minutes: 600,
+  internetGB: 5,
+  additionalServices: [],
+  totalCost: 0,
+};
+
+export const tariffConfigSlice = createSlice({
+  name: "tariffConfig",
+  initialState,
+  reducers: {
+    setMinutes: (state, action: PayloadAction<number>) => {
+      state.minutes = action.payload;
+    },
+    setInternetGB: (state, action: PayloadAction<number>) => {
+      state.internetGB = action.payload;
+    },
+    setAdditionalServices: (state, action: PayloadAction<string[]>) => {
+      state.additionalServices = action.payload;
+    },
+    setTotalCost: (state, action: PayloadAction<number>) => {
+      state.totalCost = action.payload;
+    },
+  },
+});
+
+export const {
+  setMinutes,
+  setInternetGB,
+  setAdditionalServices,
+  setTotalCost,
+} = tariffConfigSlice.actions;
+
+export const selectTariffConfig = (state: {
+  tariffConfig: TariffConfigState;
+}) => state.tariffConfig;
