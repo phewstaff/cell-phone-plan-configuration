@@ -29,6 +29,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   setMinutes,
   setInternetGB,
+  setSMS,
   setAdditionalServices,
   setTotalCost,
   selectTariffConfig,
@@ -131,6 +132,17 @@ export default function App() {
             step={25}
             className="min-w-max"
             onValueChange={(newValue) => dispatch(setInternetGB(newValue[0]))}
+          />
+          <Label htmlFor="sms">СМС</Label>
+
+          <Slider
+            value={[tariffData.sms]}
+            id="sms"
+            defaultValue={[tariffData.sms]}
+            max={75}
+            step={25}
+            className="min-w-max"
+            onValueChange={(newValue) => dispatch(setSMS(newValue[0]))}
           />
 
           <div className="flex items-center space-x-2">

@@ -2,6 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 export interface TariffConfigState {
   minutes: number;
+  sms: number;
   internetGB: number;
   additionalServices: string[];
   totalCost: number;
@@ -9,6 +10,7 @@ export interface TariffConfigState {
 
 const initialState: TariffConfigState = {
   minutes: 600,
+  sms: 0,
   internetGB: 5,
   additionalServices: [],
   totalCost: 0,
@@ -20,6 +22,9 @@ export const tariffConfigSlice = createSlice({
   reducers: {
     setMinutes: (state, action: PayloadAction<number>) => {
       state.minutes = action.payload;
+    },
+    setSMS: (state, action: PayloadAction<number>) => {
+      state.sms = action.payload;
     },
     setInternetGB: (state, action: PayloadAction<number>) => {
       state.internetGB = action.payload;
@@ -35,6 +40,7 @@ export const tariffConfigSlice = createSlice({
 
 export const {
   setMinutes,
+  setSMS,
   setInternetGB,
   setAdditionalServices,
   setTotalCost,
